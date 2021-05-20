@@ -59,6 +59,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <Button Text="Registrated Teams" BackgroundColor="SkyBlue" Command="{Binding TeamsCMD}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

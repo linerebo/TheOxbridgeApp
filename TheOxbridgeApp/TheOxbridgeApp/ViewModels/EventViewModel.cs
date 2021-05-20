@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using TheOxbridgeApp.Models;
 using TheOxbridgeApp.Services;
 using TheOxbridgeApp.Views.Popups;
@@ -47,7 +48,7 @@ namespace TheOxbridgeApp.ViewModels
         #endregion
 
         #region -- Commands -- 
-
+        public ICommand TeamsCMD { get; set; }
         #endregion
 
 
