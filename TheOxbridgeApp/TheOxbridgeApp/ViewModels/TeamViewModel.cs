@@ -15,7 +15,7 @@ namespace TheOxbridgeApp.ViewModels
         {
             serverClient = new ServerClient();
             sharedData = SingletonSharedData.GetInstance();
-
+            
         }
         
     }

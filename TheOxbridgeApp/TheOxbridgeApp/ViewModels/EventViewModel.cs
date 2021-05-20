@@ -7,6 +7,7 @@ using System.Windows.Input;
 using TheOxbridgeApp.Models;
 using TheOxbridgeApp.Services;
 using TheOxbridgeApp.Views.Popups;
+using Xamarin.Forms;
 
 namespace TheOxbridgeApp.ViewModels
 {
@@ -17,6 +18,7 @@ namespace TheOxbridgeApp.ViewModels
         private ServerClient serverClient;
 
         private List<Event> unHandledEvents;
+        
 
         #endregion
 
@@ -48,13 +50,14 @@ namespace TheOxbridgeApp.ViewModels
         #endregion
 
         #region -- Commands -- 
-        public ICommand TeamsCMD { get; set; }
+        public ICommand NavigateToTeamsCMD { get; set; }
         #endregion
 
 
         public EventViewModel()
         {
             serverClient = new ServerClient();
+            NavigateToTeamsCMD = new Command(NavigateToTeams);
         }
 
         /// <summary>
@@ -135,6 +138,12 @@ namespace TheOxbridgeApp.ViewModels
                 await PopupNavigation.PushAsync(new LoadingPopupView());
                 await PopupNavigation.PushAsync(new EventPopupView(tempSelectedEvent));
             }
+        }
+
+        private async void NavigateToTeams()
+        {
+            await NavigationService.NavigateToAsync(typeof(TeamViewModel));
+
         }
     }
 }
