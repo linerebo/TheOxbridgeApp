@@ -4,9 +4,13 @@
              x:Class="TheOxbridgeApp.Views.TeamView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Registrated Teams"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Registrated Teams" FontSize="20" BackgroundColor="SkyBlue"></Label>
+
+            <Button x:Name="btnTakePhoto" Text="PHOTO"></Button>
+            <Image x:Name="resultImage"></Image>
+            <Label x:Name="statusLabel"></Label>
+            <Button x:Name="btnPickPhoto" Text="Pick Photo"></Button>
+                
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -10,6 +10,7 @@ using TheOxbridgeApp.Droid;
 using TheOxbridgeApp.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Plugin.Media;
 
 //[assembly: Dependency(typeof(MainActivity))]
 namespace TheOxbridgeApp.Droid
@@ -23,7 +24,7 @@ namespace TheOxbridgeApp.Droid
         #endregion
 
         
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState) //changed
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -31,6 +32,7 @@ namespace TheOxbridgeApp.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            await CrossMedia.Current.Initialize();  //added
             Forms.Init(this, savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
