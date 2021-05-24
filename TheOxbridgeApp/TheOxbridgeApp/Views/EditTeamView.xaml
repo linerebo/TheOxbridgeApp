@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheOxbridgeApp.Views.EditTeamView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Edit Team" FontSize="20" BackgroundColor="SkyBlue"></Label>
+
+            <Button x:Name="btnPickPhoto" Text="Pick Photo"></Button>
+            <Button x:Name="btnTakePhoto" Text="Take Photo"></Button>
+            <Label x:Name="statusLabel"></Label>
+            <Image x:Name="resultImage" HeightRequest="300" WidthRequest="200"></Image>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

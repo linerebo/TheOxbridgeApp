@@ -1,16 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:baseViewModel="clr-namespace:TheOxbridgeApp.ViewModels;assembly=TheOxbridgeApp"
+             baseViewModel:ViewModelLocator.AutoWireViewModel="true"
+             
              x:Class="TheOxbridgeApp.Views.TeamView">
+             
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Registrated Teams" FontSize="20" BackgroundColor="SkyBlue"></Label>
 
-            <Button x:Name="btnTakePhoto" Text="PHOTO"></Button>
-            <Image x:Name="resultImage"></Image>
-            <Label x:Name="statusLabel"></Label>
-            <Button x:Name="btnPickPhoto" Text="Pick Photo"></Button>
-                
+            
+
+            <Button Text="Edit Team" BackgroundColor="SkyBlue" Command="{Binding NavigateToEditTeamCMD}"></Button>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
