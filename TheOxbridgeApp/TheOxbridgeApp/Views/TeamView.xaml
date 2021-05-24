@@ -3,14 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:baseViewModel="clr-namespace:TheOxbridgeApp.ViewModels;assembly=TheOxbridgeApp"
              baseViewModel:ViewModelLocator.AutoWireViewModel="true"
-             
              x:Class="TheOxbridgeApp.Views.TeamView">
              
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Registrated Teams" FontSize="20" BackgroundColor="SkyBlue"></Label>
-
             
+            <Entry Text="{Binding SearchText}" Placeholder="Søg" ></Entry>
+            <ListView SeparatorColor="Transparent" x:Name="navigationList" ItemsSource="{Binding Ships}"  SelectedItem="{Binding SelectedShip, Mode=TwoWay}" HasUnevenRows="True">
+                <ListView.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Sejlbåd navn" HorizontalOptions="Fill"  Grid.Column="0" FontAttributes="Bold" Margin="1"/>
+                        <Label Text="Team navn" HorizontalOptions="Fill"  Grid.Column="1" FontAttributes="Bold" Margin="1"/>
+                        <Label Text="Team Image" HorizontalOptions="Fill"  Grid.Column="2" FontAttributes="Bold" Margin="1"/>
+                    </Grid>
+                </ListView.Header>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Name}" Grid.Column="0"></Label>
+                                <Label Text="{Binding TeamName}" Grid.Column="1"></Label>
+                                <Label Text="{Binding Image}" Grid.Column="2"></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
             <Button Text="Edit Team" BackgroundColor="SkyBlue" Command="{Binding NavigateToEditTeamCMD}"></Button>
 

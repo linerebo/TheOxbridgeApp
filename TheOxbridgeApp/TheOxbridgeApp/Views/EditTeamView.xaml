@@ -6,6 +6,17 @@
         <StackLayout>
             <Label Text="Edit Team" FontSize="20" BackgroundColor="SkyBlue"></Label>
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="Sejlbåd navn" HorizontalOptions="Fill"  Grid.Column="0" FontAttributes="Bold" Margin="1"/>
+                <Label Text="Team navn" HorizontalOptions="Fill"  Grid.Column="1" FontAttributes="Bold" Margin="1"/>
+                <Label Text="Team Image" HorizontalOptions="Fill"  Grid.Column="2" FontAttributes="Bold" Margin="1"/>
+            </Grid>
+
             <Button x:Name="btnPickPhoto" Text="Pick Photo"></Button>
             <Button x:Name="btnTakePhoto" Text="Take Photo"></Button>
             <Label x:Name="statusLabel"></Label>
