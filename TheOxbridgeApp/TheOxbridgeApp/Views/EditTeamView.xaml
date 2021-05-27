@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:baseViewModel="clr-namespace:TheOxbridgeApp.ViewModels;assembly=TheOxbridgeApp"
+             baseViewModel:ViewModelLocator.AutoWireViewModel="true"
              x:Class="TheOxbridgeApp.Views.EditTeamView">
     <ContentPage.Content>
         <StackLayout>
@@ -18,9 +21,24 @@
             </Grid>
 
             <Button x:Name="btnPickPhoto" Text="Pick Photo"></Button>
-            <Button x:Name="btnTakePhoto" Text="Take Photo"></Button>
+            
+            <Button x:Name="btnTakePhoto" Text="Take Photo" Command="{Binding TakePhotoCMD}"></Button>
+
+            
+            <ff:CachedImage  BackgroundColor="Transparent" Aspect="AspectFill" Source="{Binding TeamPicture.PictureSource}"
+                                             Margin="0,0,0,0"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                                             CacheDuration="5" FadeAnimationEnabled="True" LoadingDelay="0" LoadingPriority="Highest">
+            </ff:CachedImage>
+            
+
             <Label x:Name="statusLabel"></Label>
+
+            <!--
+            <Image Source="{Binding TeamPicture.PictureSource}"></Image>
+            -->
+            
             <Image x:Name="resultImage" HeightRequest="300" WidthRequest="200"></Image>
+            
             
         </StackLayout>
     </ContentPage.Content>

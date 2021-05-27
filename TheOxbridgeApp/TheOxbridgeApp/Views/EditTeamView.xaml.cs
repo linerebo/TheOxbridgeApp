@@ -15,7 +15,7 @@ namespace TheOxbridgeApp.Views
         public EditTeamView()
         {
             InitializeComponent();
-            btnTakePhoto.Clicked += btnTakePhoto_Clicked;
+            //btnTakePhoto.Clicked += btnTakePhoto_Clicked;
             btnPickPhoto.Clicked += btnPickPhoto_Clicked;
         }
 
@@ -34,7 +34,8 @@ namespace TheOxbridgeApp.Views
             }
         }
 
-        private async void btnTakePhoto_Clicked(object sender, EventArgs e)
+        //method for take photo, the photo is shown in resultImage
+        /*private async void btnTakePhoto_Clicked(object sender, EventArgs e)
         {
             try
             {
@@ -52,7 +53,7 @@ namespace TheOxbridgeApp.Views
             }
 
             var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
-            { SaveToAlbum = true, Name = "Test.jpg" });//, DefaultCamera= Plugin.Media.Abstractions.CameraDevice.Rear
+            { SaveToAlbum = true, Name = "Team.jpg" });//, DefaultCamera= Plugin.Media.Abstractions.CameraDevice.Rear
 
             if (photo != null)
             {
@@ -62,6 +63,6 @@ namespace TheOxbridgeApp.Views
                     //photo.Dispose();
                 }
             }
-        }
+        }*/
     }
 }

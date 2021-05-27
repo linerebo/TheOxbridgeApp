@@ -8,6 +8,7 @@ namespace TheOxbridgeApp.ViewModels
     public abstract class BaseViewModel : BindableObject
     {
         #region -- Local variables --
+        public bool isBusy = false;
         protected readonly INavigationService NavigationService;
         internal static String UserName = "";
         #endregion
