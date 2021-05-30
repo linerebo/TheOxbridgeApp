@@ -28,7 +28,11 @@
                 </Grid.ColumnDefinitions>
                 <Label Text="{Binding sharedData.SelectedShip.Name}" HorizontalOptions="Fill"  Grid.Column="0" FontAttributes="Bold" Margin="1"/>
                 <Label Text="{Binding sharedData.SelectedShip.TeamName}" HorizontalOptions="Fill"  Grid.Column="1" FontAttributes="Bold" Margin="1"/>
+                
                 <Image Source="{Binding sharedData.SelectedShip.teamImage.PictureSource}" HorizontalOptions="Fill"  Grid.Column="2" Margin="1"/>
+                <!--
+                <Image Source="icon.png" Grid.Column="2"></Image>
+                -->
             </Grid>
 
             <Button x:Name="btnPickPhoto" Text="Pick Photo"></Button>

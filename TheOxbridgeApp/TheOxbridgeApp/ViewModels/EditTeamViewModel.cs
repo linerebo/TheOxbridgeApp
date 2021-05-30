@@ -76,7 +76,8 @@ namespace TheOxbridgeApp.ViewModels
                         photo.GetStreamWithImageRotatedForExternalStorage().CopyTo(memoryStreamHandler);
 
                         teamImageTmp.Picture = memoryStreamHandler.ToArray();
-                        TeamPicture = teamImageTmp;
+                        //TeamPicture = teamImageTmp;
+                        sharedData.SelectedShip.teamImage = teamImageTmp;
                     }
                 }
             }
