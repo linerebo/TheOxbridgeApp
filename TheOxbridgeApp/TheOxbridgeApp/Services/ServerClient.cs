@@ -184,6 +184,19 @@ namespace TheOxbridgeApp.Services
             return ships;
         }
 
+        public List<Ship> GetAllShips()
+        {
+            WebRequest request = WebRequest.Create(Target.Ships);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+
+            String responseFromServer = GetResponse(request);
+
+            List<Ship> ships = JsonConvert.DeserializeObject<List<Ship>>(responseFromServer);
+            return ships;
+        }
+
+
         /// <summary>
         /// Gets the response from a request from the backend
         /// </summary>

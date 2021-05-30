@@ -10,7 +10,7 @@
             <Label Text="Registrated Teams" FontSize="20" BackgroundColor="SkyBlue"></Label>
             
             <Entry Text="{Binding SearchText}" Placeholder="Søg" ></Entry>
-            <ListView SeparatorColor="Transparent" x:Name="navigationList" ItemsSource="{Binding Ships}"  SelectedItem="{Binding SelectedShip, Mode=TwoWay}" HasUnevenRows="True">
+            <ListView SeparatorColor="Transparent" x:Name="navigationList" ItemsSource="{Binding Ships}"  SelectedItem="{Binding sharedData.SelectedShip, Mode=TwoWay}" HasUnevenRows="True">
                 <ListView.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -38,7 +38,7 @@
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding Name}" Grid.Column="0"></Label>
                                 <Label Text="{Binding TeamName}" Grid.Column="1"></Label>
-                                <Label Text="{Binding Image}" Grid.Column="2"></Label>
+                                <!--<Label Text="{Binding Image}" Grid.Column="2"></Label>-->
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

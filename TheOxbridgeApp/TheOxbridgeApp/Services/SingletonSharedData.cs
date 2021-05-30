@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using TheOxbridgeApp.ViewModels.Popups;
 
 namespace TheOxbridgeApp.Models
@@ -19,6 +20,10 @@ namespace TheOxbridgeApp.Models
         public int SelectedShipId { get; set; }
 
         public Event SelectedEvent { get; set; }
+
+        public Ship SelectedShip { get; set; }
+
+        public ObservableCollection<Models.Ship> Ships { get; set; }  = new ObservableCollection<Ship>();
 
         public bool isMapDisplayed { get; set; }
 

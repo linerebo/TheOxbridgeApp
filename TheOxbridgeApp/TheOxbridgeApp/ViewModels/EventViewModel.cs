@@ -143,6 +143,7 @@ namespace TheOxbridgeApp.ViewModels
         //Navigate to View with all Teams
         private async void NavigateToTeams()
         {
+            
             await NavigationService.NavigateToAsync(typeof(TeamViewModel));
 
         }
