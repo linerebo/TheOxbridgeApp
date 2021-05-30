@@ -38,7 +38,7 @@
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding Name}" Grid.Column="0"></Label>
                                 <Label Text="{Binding TeamName}" Grid.Column="1"></Label>
-                                <!--<Label Text="{Binding Image}" Grid.Column="2"></Label>-->
+                                <Label Text="{Binding teamImage}" Grid.Column="2"></Label>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

@@ -15,6 +15,7 @@ namespace TheOxbridgeApp.Models
         public String TeamName { get; set; }
         public TeamImage teamImage { get; set; }
 
+        
         public event PropertyChangedEventHandler PropertyChanged;
         public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {

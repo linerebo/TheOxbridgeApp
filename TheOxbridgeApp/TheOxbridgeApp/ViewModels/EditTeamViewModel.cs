@@ -16,7 +16,7 @@ namespace TheOxbridgeApp.ViewModels
     public class EditTeamViewModel : BaseViewModel
     {
         private ServerClient serverClient;
-        private SingletonSharedData sharedData;
+        public SingletonSharedData sharedData { get; set; }
         public String ErrorMsg { get; set; }
         public TeamImage TeamPicture { get; set; }
 

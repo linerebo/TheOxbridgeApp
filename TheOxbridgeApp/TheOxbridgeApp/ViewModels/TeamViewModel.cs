@@ -14,7 +14,7 @@ namespace TheOxbridgeApp.ViewModels
     {
         #region --Local variables--
         private ServerClient serverClient;
-        private SingletonSharedData sharedData;
+        public SingletonSharedData sharedData { get; set; }
         private List<Ship> unHandledShips;
         #endregion
 
@@ -60,12 +60,13 @@ namespace TheOxbridgeApp.ViewModels
             //sharedData.Ships = new ObservableCollection<Ship>(serverClient.GetAllShips());
         }
 
+        // Navigates to View with selected Ship
         private async void NavigateToEditTeam()
         {
             await NavigationService.NavigateToAsync(typeof(EditTeamViewModel));
         }
 
-        // Navigates to view with selected Ship
+        
         private async void NavigateToShip()
         {
 
