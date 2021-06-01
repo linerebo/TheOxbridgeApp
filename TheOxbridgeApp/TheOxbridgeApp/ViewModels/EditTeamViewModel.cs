@@ -19,10 +19,12 @@ namespace TheOxbridgeApp.ViewModels
         public SingletonSharedData sharedData { get; set; }
         public String ErrorMsg { get; set; }
         public TeamImage TeamPicture { get; set; }
+        public Ship SelectedShip { get; set; }
 
         
         #region --Commands--
         public ICommand TakePhotoCMD { get; set; }
+        public ICommand ChoosePhotoCMD { get; set; }
         #endregion
 
         public EditTeamViewModel()
@@ -31,7 +33,9 @@ namespace TheOxbridgeApp.ViewModels
             sharedData = SingletonSharedData.GetInstance();
 
             TakePhotoCMD = new Command(TakePhoto);
+            ChoosePhotoCMD = new Command(ChoosePhoto);
             TeamPicture = new TeamImage();
+            SelectedShip = new Ship();
         }
 
         private async void TakePhoto()
@@ -76,12 +80,19 @@ namespace TheOxbridgeApp.ViewModels
                         photo.GetStreamWithImageRotatedForExternalStorage().CopyTo(memoryStreamHandler);
 
                         teamImageTmp.Picture = memoryStreamHandler.ToArray();
-                        //TeamPicture = teamImageTmp;
-                        sharedData.SelectedShip.teamImage = teamImageTmp;
+                        //TeamPicture = new TeamImage();
+                        TeamPicture = teamImageTmp;
+                        //SelectedShip.teamImage = teamImageTmp;
+                        //sharedData.SelectedShip.teamImage = teamImageTmp;
                     }
                 }
             }
             isBusy = false;
+        }
+
+        public void ChoosePhoto()
+        {
+            sharedData.SelectedShip.teamImage = TeamPicture;
         }
     }
 }

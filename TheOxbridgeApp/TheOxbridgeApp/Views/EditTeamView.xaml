@@ -15,45 +15,31 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Text="Sejlbåd navn" HorizontalOptions="Fill"  Grid.Column="0" FontAttributes="Bold" Margin="1"/>
-                <Label Text="Team navn" HorizontalOptions="Fill"  Grid.Column="1" FontAttributes="Bold" Margin="1"/>
-                <Label Text="Team Image" HorizontalOptions="Fill"  Grid.Column="2" FontAttributes="Bold" Margin="1"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Text="Sejlbåd navn" HorizontalOptions="Fill"  Grid.Column="0" Grid.Row="0" FontAttributes="Bold" Margin="1"/>
+                <Label Text="Team navn" HorizontalOptions="Fill"  Grid.Column="1" Grid.Row="0" FontAttributes="Bold" Margin="1"/>
+                <Label Text="Team Image" HorizontalOptions="Fill"  Grid.Column="2" Grid.Row="0" FontAttributes="Bold" Margin="1"/>
+                
+                <Label Text="{Binding sharedData.SelectedShip.Name}" HorizontalOptions="Fill"  Grid.Column="0" Grid.Row="1" FontAttributes="Bold" Margin="1"/>
+                <Label Text="{Binding sharedData.SelectedShip.TeamName}" HorizontalOptions="Fill"  Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Margin="1"/>
+                <Image Source="{Binding sharedData.SelectedShip.teamImage.PictureSource}" Grid.Column="2" Grid.Row="1"></Image>
+                
+                
             </Grid>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Label Text="{Binding sharedData.SelectedShip.Name}" HorizontalOptions="Fill"  Grid.Column="0" FontAttributes="Bold" Margin="1"/>
-                <Label Text="{Binding sharedData.SelectedShip.TeamName}" HorizontalOptions="Fill"  Grid.Column="1" FontAttributes="Bold" Margin="1"/>
+            <Button x:Name="btnTakePhoto" Text="CAMERA" Command="{Binding TakePhotoCMD}"></Button>
 
-                <ff:CachedImage Source="{Binding sharedData.SelectedShip.teamImage.PictureSource}" Grid.Column="2" ></ff:CachedImage>
-                
-                <!--
-                <Image Source="{Binding sharedData.SelectedShip.teamImage.PictureSource}" HorizontalOptions="Fill"  Grid.Column="2" Margin="1"/>
-                
-                <Image Source="icon.png" Grid.Column="2"></Image>
-                -->
-            </Grid>
-
-            <Button x:Name="btnPickPhoto" Text="Pick Photo"></Button>
+            <Button x:Name="btnPickPhoto" Text="Pick Photo from Gallery"></Button>
             
-            <Button x:Name="btnTakePhoto" Text="Take Photo" Command="{Binding TakePhotoCMD}"></Button>
+            <ff:CachedImage Source="{Binding TeamPicture.PictureSource}" HeightRequest="200" WidthRequest="200" ></ff:CachedImage>
+
+            <Button Text="Choose Photo for Team Profile"  Command="{Binding ChoosePhotoCMD}"></Button>
+
 
             
-            <ff:CachedImage  BackgroundColor="Transparent" Aspect="AspectFill" Source="{Binding TeamPicture.PictureSource}"
-                                             Margin="0,0,0,0"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
-                                             CacheDuration="5" FadeAnimationEnabled="True" LoadingDelay="0" LoadingPriority="Highest">
-            </ff:CachedImage>
-            
-
-            <Label x:Name="statusLabel"></Label>
-
-            <!--
-            <Image Source="{Binding TeamPicture.PictureSource}"></Image>
-            -->
             
             <Image x:Name="resultImage" HeightRequest="300" WidthRequest="200"></Image>
             

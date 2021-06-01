@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:baseViewModel="clr-namespace:TheOxbridgeApp.ViewModels;assembly=TheOxbridgeApp"
              baseViewModel:ViewModelLocator.AutoWireViewModel="true"
              x:Class="TheOxbridgeApp.Views.TeamView">
@@ -38,7 +39,8 @@
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding Name}" Grid.Column="0"></Label>
                                 <Label Text="{Binding TeamName}" Grid.Column="1"></Label>
-                                <Label Text="{Binding teamImage}" Grid.Column="2"></Label>
+                                <Image Source="{Binding teamImage.PictureSource}" Grid.Column="2"></Image>
+                                
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
