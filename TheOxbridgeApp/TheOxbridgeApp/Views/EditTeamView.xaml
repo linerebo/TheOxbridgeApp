@@ -34,7 +34,10 @@
 
             <Button x:Name="btnPickPhoto" Text="Pick Photo from Gallery"></Button>
             
-            <ff:CachedImage Source="{Binding TeamPicture.PictureSource}" HeightRequest="200" WidthRequest="200" ></ff:CachedImage>
+            <ff:CachedImage Source="{Binding TeamPicture.PictureSource}" 
+                            LoadingPlaceholder="trackingBoatIcon.png"  
+                            DownsampleToViewSize="true"
+                            HeightRequest="200" WidthRequest="200" ></ff:CachedImage>
 
             <Button Text="Choose Photo for Team Profile"  Command="{Binding ChoosePhotoCMD}"></Button>
 

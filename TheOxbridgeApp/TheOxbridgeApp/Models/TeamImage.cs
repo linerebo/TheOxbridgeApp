@@ -10,33 +10,18 @@ namespace TheOxbridgeApp.Models
 {
     public class TeamImage: INotifyPropertyChanged
     {
-        //public byte[] Picture { get; set; }
-
-        //public ImageSource PictureSource { get; set; }
         private byte[] picture;
         public byte[] Picture
         {
             get => picture;
-            set
-            {
-                picture = value;
-                //RaisePropertyChanged(() => Picture);
-                PictureSource = ImageSource.FromStream(() => new MemoryStream(picture));
-            }
+            set { picture = value; PictureSource = ImageSource.FromStream(() => new MemoryStream(picture)); }
         }
 
-        private ImageSource pictureSource; // = ImageSource.FromFile("steve2.jpg");
+        private ImageSource pictureSource = ImageSource.FromFile("trackingBoatIcon.png");
         public ImageSource PictureSource
         {
-            set
-            {
-                pictureSource = value;
-                RaisePropertyChanged();
-            }
-            get
-            {
-                return pictureSource;// Device.RuntimePlatform == Device.Android ? ImageSource.FromFile(filename) : null;
-            }
+            set { pictureSource = value; RaisePropertyChanged(); }
+            get { return pictureSource; }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -32,7 +32,7 @@ namespace TheOxbridgeApp.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true); //added
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true); //initialize the FFImageLoading library
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             //await CrossMedia.Current.Initialize();  //added
             //Forms.Init(this, savedInstanceState);

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using TheOxbridgeApp.Data;
 using TheOxbridgeApp.Models;
@@ -14,6 +16,9 @@ namespace TheOxbridgeApp.Services
     {
         #region -- Local variables -- 
         private DataController dataController;
+        private ServerClient client;
+        private string ipAddress = "192.168.178.46";
+        private string port = "3000";
         #endregion
 
         public ServerClient()
@@ -184,6 +189,8 @@ namespace TheOxbridgeApp.Services
             return ships;
         }
 
+        //Gets all ships from the backend
+        // returns A list of Ships
         public List<Ship> GetAllShips()
         {
             WebRequest request = WebRequest.Create(Target.Ships);
@@ -194,6 +201,24 @@ namespace TheOxbridgeApp.Services
 
             List<Ship> ships = JsonConvert.DeserializeObject<List<Ship>>(responseFromServer);
             return ships;
+        }
+
+        public void SaveImageToShipToDB(int shipId, TeamImage teamImage)
+        {
+            
+            WebRequest request = WebRequest.Create(Target.Ships + shipId);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+
+            /*
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string json = JsonConvert.SerializeObject(Ship);
+            var stringContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            //Console.WriteLine("json " + json);
+            HttpResponseMessage response = client.PostAsync(Target.Ships, stringContent).Result;
+            response.EnsureSuccessStatusCode();
+            var resp = response.Content.ReadAsStringAsync().Result;
+            */
         }
 
 

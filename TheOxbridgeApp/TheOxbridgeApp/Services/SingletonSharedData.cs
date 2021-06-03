@@ -4,7 +4,7 @@ using TheOxbridgeApp.ViewModels.Popups;
 
 namespace TheOxbridgeApp.Models
 {
-    public sealed class SingletonSharedData 
+    public sealed class SingletonSharedData
     {
         #region -- Local variables --
 
@@ -21,8 +21,9 @@ namespace TheOxbridgeApp.Models
 
         public Event SelectedEvent { get; set; }
 
-        
-        public Ship SelectedShip { get; set;}
+
+        public Ship SelectedShip { get; set; }
+        public TeamImage teamImage { get; set; }
 
         public ObservableCollection<Models.Ship> Ships { get; set; }  = new ObservableCollection<Ship>();
 

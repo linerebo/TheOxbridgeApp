@@ -15,11 +15,24 @@ namespace TheOxbridgeApp.ViewModels
 {
     public class EditTeamViewModel : BaseViewModel
     {
+        public event PropertyChangedEventHandler PropertyChangedNew;
+        public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedNew?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         private ServerClient serverClient;
         public SingletonSharedData sharedData { get; set; }
         public String ErrorMsg { get; set; }
-        public TeamImage TeamPicture { get; set; }
+
+        private TeamImage _teamImage = null;
+        public TeamImage TeamPicture 
+        { 
+            get { return _teamImage; }
+            set { _teamImage = value; RaisePropertyChanged(); }
+        }
         public Ship SelectedShip { get; set; }
+
 
         
         #region --Commands--
@@ -80,10 +93,7 @@ namespace TheOxbridgeApp.ViewModels
                         photo.GetStreamWithImageRotatedForExternalStorage().CopyTo(memoryStreamHandler);
 
                         teamImageTmp.Picture = memoryStreamHandler.ToArray();
-                        //TeamPicture = new TeamImage();
                         TeamPicture = teamImageTmp;
-                        //SelectedShip.teamImage = teamImageTmp;
-                        //sharedData.SelectedShip.teamImage = teamImageTmp;
                     }
                 }
             }
