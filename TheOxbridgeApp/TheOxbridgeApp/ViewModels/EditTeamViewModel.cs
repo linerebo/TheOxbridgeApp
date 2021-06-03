@@ -15,29 +15,25 @@ namespace TheOxbridgeApp.ViewModels
 {
     public class EditTeamViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChangedNew;
-        public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedNew?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+        #region -- local variables
         private ServerClient serverClient;
         public SingletonSharedData sharedData { get; set; }
         public String ErrorMsg { get; set; }
-
-        private TeamImage _teamImage = null;
-        public TeamImage TeamPicture 
-        { 
-            get { return _teamImage; }
-            set { _teamImage = value; RaisePropertyChanged(); }
-        }
         public Ship SelectedShip { get; set; }
+        #endregion
 
-
-        
         #region --Commands--
         public ICommand TakePhotoCMD { get; set; }
         public ICommand ChoosePhotoCMD { get; set; }
+        #endregion
+
+        #region -- Binding values--
+        private TeamImage _teamPicture;
+        public TeamImage TeamPicture
+        {
+            get { return _teamPicture; }
+            set { _teamPicture = value; OnPropertyChanged(); }
+        }
         #endregion
 
         public EditTeamViewModel()
