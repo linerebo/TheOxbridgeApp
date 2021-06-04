@@ -35,6 +35,16 @@ namespace TheOxbridgeApp.ViewModels
             get { return _teamPicture; }
             set { _teamPicture = value; OnPropertyChanged(); }
         }
+        private String photoPath;
+        public String PhotoPath
+        {
+            get => photoPath;
+            set
+            {
+                photoPath = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         public EditTeamViewModel()
@@ -111,9 +121,7 @@ namespace TheOxbridgeApp.ViewModels
             {
                 var stream = await photo.OpenReadAsync();
 
-                TeamPicture.PictureSource = ImageSource.FromStream(() => stream);  // TO DO: How to set photo correct on object?
-
-                //resultImage.Source = ImageSource.FromStream(() => stream);
+                TeamPicture.PictureSource = ImageSource.FromStream(() => stream);  // TO DO: How to select this photo as Team Photo
             }
         }
 

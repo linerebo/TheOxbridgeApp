@@ -31,7 +31,7 @@ namespace TheOxbridgeApp.ViewModels
         public Ship SelectedShip
         {
             get { return selectedShip; }
-            set { selectedShip = value; OnPropertyChanged(); NavigateToShip(); }
+            set { selectedShip = value; OnPropertyChanged(); }
         }
 
         private String searchText;
@@ -57,7 +57,6 @@ namespace TheOxbridgeApp.ViewModels
 
             unHandledShips = serverClient.GetAllShips();
             Ships = new ObservableCollection<Ship>(unHandledShips);
-            //sharedData.Ships = new ObservableCollection<Ship>(serverClient.GetAllShips());
         }
 
         // Navigates to View with selected Ship
@@ -66,16 +65,10 @@ namespace TheOxbridgeApp.ViewModels
             await NavigationService.NavigateToAsync(typeof(EditTeamViewModel));
         }
 
-        
-        private async void NavigateToShip()
-        {
-
-        }
-
         // Updates the list of ships according to searchText
         private void UpdateListShips()
         {
-            Ships = new ObservableCollection<Ship>(unHandledShips.Where(e => e.Name.ToLower().Contains(searchText.ToLower()) || e.TeamName.ToLower().Contains(searchText.ToLower())));
+            Ships = new ObservableCollection<Ship>(unHandledShips.Where(e => e.Name.ToLower().Contains(searchText.ToLower())));
         }  
     }
 }

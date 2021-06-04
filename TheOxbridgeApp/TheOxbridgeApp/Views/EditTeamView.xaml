@@ -26,23 +26,21 @@
                 <Label Text="{Binding sharedData.SelectedShip.Name}" HorizontalOptions="Fill"  Grid.Column="0" Grid.Row="1" FontAttributes="Bold" Margin="1"/>
                 <Label Text="{Binding sharedData.SelectedShip.TeamName}" HorizontalOptions="Fill"  Grid.Column="1" Grid.Row="1" FontAttributes="Bold" Margin="1"/>
                 <Image Source="{Binding sharedData.SelectedShip.teamImage.PictureSource}" Grid.Column="2" Grid.Row="1"></Image>
-                
-                
             </Grid>
-
-            <Button x:Name="btnTakePhoto" Text="CAMERA" Command="{Binding TakePhotoCMD}"></Button>
-
-            <Button x:Name="btnPickPhoto" Text="Pick Photo from Gallery" Command="{Binding PickPhotoFromGalleryCMD}"></Button>
             
+            
+                <Button Text="CAMERA" BackgroundColor="SkyBlue" CornerRadius="8" Command="{Binding TakePhotoCMD}"></Button>
+
+                <Button Text="Pick Photo from Gallery" BackgroundColor="SkyBlue" CornerRadius="8" Command="{Binding PickPhotoFromGalleryCMD}"></Button>
+                
+         
             <ff:CachedImage Source="{Binding TeamPicture.PictureSource}" 
                             LoadingPlaceholder="loading.png"  
                             DownsampleToViewSize="true"
                             HeightRequest="200" WidthRequest="200" ></ff:CachedImage>
             
-            <Button Text="Choose Photo for Team Profile"  Command="{Binding ChoosePhotoCMD}"></Button>
             
-            <Image x:Name="resultImage" HeightRequest="300" WidthRequest="200"></Image>
-            
+            <Button Text="Choose this Photo for Team Profile" BackgroundColor="SkyBlue" CornerRadius="8" Command="{Binding ChoosePhotoCMD}"></Button>
             
         </StackLayout>
     </ContentPage.Content>

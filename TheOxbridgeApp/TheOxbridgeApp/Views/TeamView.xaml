@@ -47,7 +47,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button Text="Edit Team" BackgroundColor="SkyBlue" Command="{Binding NavigateToEditTeamCMD}"></Button>
+            <Button Text="Edit Team" BackgroundColor="SkyBlue" CornerRadius="8" Command="{Binding NavigateToEditTeamCMD}"></Button>
 
         </StackLayout>
     </ContentPage.Content>
