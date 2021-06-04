@@ -32,17 +32,14 @@
 
             <Button x:Name="btnTakePhoto" Text="CAMERA" Command="{Binding TakePhotoCMD}"></Button>
 
-            <Button x:Name="btnPickPhoto" Text="Pick Photo from Gallery"></Button>
+            <Button x:Name="btnPickPhoto" Text="Pick Photo from Gallery" Command="{Binding PickPhotoFromGalleryCMD}"></Button>
             
             <ff:CachedImage Source="{Binding TeamPicture.PictureSource}" 
                             LoadingPlaceholder="loading.png"  
                             DownsampleToViewSize="true"
                             HeightRequest="200" WidthRequest="200" ></ff:CachedImage>
-
-            <Button Text="Choose Photo for Team Profile"  Command="{Binding ChoosePhotoCMD}"></Button>
-
-
             
+            <Button Text="Choose Photo for Team Profile"  Command="{Binding ChoosePhotoCMD}"></Button>
             
             <Image x:Name="resultImage" HeightRequest="300" WidthRequest="200"></Image>
             

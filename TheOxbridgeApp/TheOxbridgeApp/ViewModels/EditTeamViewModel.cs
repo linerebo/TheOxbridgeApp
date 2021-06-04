@@ -9,7 +9,7 @@ using TheOxbridgeApp.Models;
 using TheOxbridgeApp.Services;
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
-
+using Xamarin.Essentials;
 
 namespace TheOxbridgeApp.ViewModels
 {
@@ -25,6 +25,7 @@ namespace TheOxbridgeApp.ViewModels
         #region --Commands--
         public ICommand TakePhotoCMD { get; set; }
         public ICommand ChoosePhotoCMD { get; set; }
+        public ICommand PickPhotoFromGalleryCMD { get; set; }
         #endregion
 
         #region -- Binding values--
@@ -43,10 +44,12 @@ namespace TheOxbridgeApp.ViewModels
 
             TakePhotoCMD = new Command(TakePhoto);
             ChoosePhotoCMD = new Command(ChoosePhoto);
+            PickPhotoFromGalleryCMD = new Command(PickPhotoFromGallery);
             TeamPicture = new TeamImage();
             SelectedShip = new Ship();
         }
 
+        //use device camera to take new photo and store on device. Photo is shown in EditTeamView
         private async void TakePhoto()
         {
             if (isBusy)
@@ -96,6 +99,25 @@ namespace TheOxbridgeApp.ViewModels
             isBusy = false;
         }
 
+        // Pick photo from gallery on device
+        public async void PickPhotoFromGallery()
+        {
+            var photo = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+            {
+                Title = "please pick a photo"
+            });
+
+            if (photo != null)
+            {
+                var stream = await photo.OpenReadAsync();
+
+                TeamPicture.PictureSource = ImageSource.FromStream(() => stream);  // TO DO: How to set photo correct on object?
+
+                //resultImage.Source = ImageSource.FromStream(() => stream);
+            }
+        }
+
+        // selecting an TeamImage to be stored on the object SelectedShip
         public void ChoosePhoto()
         {
             sharedData.SelectedShip.teamImage = TeamPicture;

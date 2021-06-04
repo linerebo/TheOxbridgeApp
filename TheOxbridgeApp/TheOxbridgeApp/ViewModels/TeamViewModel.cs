@@ -75,7 +75,7 @@ namespace TheOxbridgeApp.ViewModels
         // Updates the list of ships according to searchText
         private void UpdateListShips()
         {
-            //Ships = new ObservableCollection<Ship>(unHandledShips.Where(e => e.Name.ToLower().Contains(searchText.ToLower()) || e.TeamName.ToLower().Contains(searchText.ToLower())));
+            Ships = new ObservableCollection<Ship>(unHandledShips.Where(e => e.Name.ToLower().Contains(searchText.ToLower()) || e.TeamName.ToLower().Contains(searchText.ToLower())));
         }  
     }
 }
