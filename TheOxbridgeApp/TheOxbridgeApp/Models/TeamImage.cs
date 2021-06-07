@@ -24,6 +24,8 @@ namespace TheOxbridgeApp.Models
             get { return pictureSource; }
         }
 
+        public String Filename { get; set; } //= "trackingBoatIcon.png";
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {

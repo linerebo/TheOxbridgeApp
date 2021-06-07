@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using TheOxbridgeApp.ViewModels.Popups;
+using Xamarin.Forms;
 
 namespace TheOxbridgeApp.Models
 {
-    public sealed class SingletonSharedData
+    public sealed class SingletonSharedData : BindableObject
     {
         #region -- Local variables --
 
@@ -25,7 +26,14 @@ namespace TheOxbridgeApp.Models
         public Ship SelectedShip { get; set; }
         public TeamImage teamImage { get; set; }
 
-        public ObservableCollection<Models.Ship> Ships { get; set; }  = new ObservableCollection<Ship>();
+        //public ObservableCollection<Models.Ship> Ships { get; set; }  = new ObservableCollection<Ship>();
+
+        private ObservableCollection<Ship> ships;
+        public ObservableCollection<Ship> Ships
+        {
+            get { return ships; }
+            set { ships = value; OnPropertyChanged(); }
+        }
 
         public bool isMapDisplayed { get; set; }
 

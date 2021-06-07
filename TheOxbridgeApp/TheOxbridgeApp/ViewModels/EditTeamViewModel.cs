@@ -102,6 +102,7 @@ namespace TheOxbridgeApp.ViewModels
                         photo.GetStreamWithImageRotatedForExternalStorage().CopyTo(memoryStreamHandler);
 
                         teamImageTmp.Picture = memoryStreamHandler.ToArray();
+                        teamImageTmp.Filename = photoName; //jpeg file
                         TeamPicture = teamImageTmp;
                     }
                 }
@@ -129,6 +130,7 @@ namespace TheOxbridgeApp.ViewModels
         public void ChoosePhoto()
         {
             sharedData.SelectedShip.teamImage = TeamPicture;
+            serverClient.SaveImageToDB(sharedData.SelectedShip.ShipId, sharedData.SelectedShip.teamImage);
         }
     }
 }

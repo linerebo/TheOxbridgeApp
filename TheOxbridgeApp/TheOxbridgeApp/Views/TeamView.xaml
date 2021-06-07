@@ -11,7 +11,7 @@
             <Label Text="Registrated Teams" FontSize="20" BackgroundColor="SkyBlue"></Label>
             
             <Entry Text="{Binding SearchText}" Placeholder="Søg" ></Entry>
-            <ListView SeparatorColor="Transparent" x:Name="navigationList" ItemsSource="{Binding Ships}"  SelectedItem="{Binding sharedData.SelectedShip, Mode=TwoWay}" HasUnevenRows="True">
+            <ListView SeparatorColor="Transparent" x:Name="navigationList" ItemsSource="{Binding sharedData.Ships}"  SelectedItem="{Binding sharedData.SelectedShip, Mode=TwoWay}" HasUnevenRows="True">
                 <ListView.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>

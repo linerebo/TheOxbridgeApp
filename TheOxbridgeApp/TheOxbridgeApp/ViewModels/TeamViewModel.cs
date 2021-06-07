@@ -20,12 +20,12 @@ namespace TheOxbridgeApp.ViewModels
 
 
         #region --Binding values--
-        private ObservableCollection<Ship> ships;
+        /*private ObservableCollection<Ship> ships;
         public ObservableCollection<Ship> Ships
         {
             get { return ships; }
             set { ships = value; OnPropertyChanged(); }
-        }
+        }*/
 
         private Ship selectedShip;
         public Ship SelectedShip
@@ -56,7 +56,7 @@ namespace TheOxbridgeApp.ViewModels
             NavigateToEditTeamCMD = new Command(NavigateToEditTeam);
 
             unHandledShips = serverClient.GetAllShips();
-            Ships = new ObservableCollection<Ship>(unHandledShips);
+            sharedData.Ships = new ObservableCollection<Ship>(unHandledShips);
         }
 
         // Navigates to View with selected Ship
@@ -68,7 +68,7 @@ namespace TheOxbridgeApp.ViewModels
         // Updates the list of ships according to searchText
         private void UpdateListShips()
         {
-            Ships = new ObservableCollection<Ship>(unHandledShips.Where(e => e.Name.ToLower().Contains(searchText.ToLower())));
+            sharedData.Ships = new ObservableCollection<Ship>(unHandledShips.Where(e => e.Name.ToLower().Contains(searchText.ToLower())));
         }  
     }
 }

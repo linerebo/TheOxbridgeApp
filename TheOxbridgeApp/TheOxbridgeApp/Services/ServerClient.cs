@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -203,22 +204,29 @@ namespace TheOxbridgeApp.Services
             return ships;
         }
 
-        public void SaveImageToShipToDB(int shipId, TeamImage teamImage)
+        // Post an image and shipID to store in DB
+        public async void SaveImageToDB(int shipId, TeamImage teamImage)
         {
-            
-            WebRequest request = WebRequest.Create(Target.Ships + shipId);
-            request.Method = "POST";
-            request.ContentType = "application/json";
+            try 
+            {
+                HttpClient client = new HttpClient();
+                MultipartFormDataContent content = new MultipartFormDataContent();
+                ByteArrayContent baContent = new ByteArrayContent(teamImage.Picture);
+                StringContent shipIdContent = new StringContent(shipId.ToString());
+                content.Add(baContent, "image"); //, teamImage.Filename);
+                content.Add(shipIdContent, "shipId");
 
-            /*
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string json = JsonConvert.SerializeObject(Ship);
-            var stringContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            //Console.WriteLine("json " + json);
-            HttpResponseMessage response = client.PostAsync(Target.Ships, stringContent).Result;
-            response.EnsureSuccessStatusCode();
-            var resp = response.Content.ReadAsStringAsync().Result;
-            */
+                var response = await client.PostAsync("http://192.168.178.46:3000/images", content);
+
+                var responsestr = response.Content.ReadAsStringAsync().Result;
+
+                Debug.WriteLine(responsestr);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception Caught: " + e.ToString());
+                return;
+            }
         }
 
 
