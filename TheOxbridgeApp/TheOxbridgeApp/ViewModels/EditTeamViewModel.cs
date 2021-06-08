@@ -26,6 +26,7 @@ namespace TheOxbridgeApp.ViewModels
         public ICommand TakePhotoCMD { get; set; }
         public ICommand ChoosePhotoCMD { get; set; }
         public ICommand PickPhotoFromGalleryCMD { get; set; }
+        public ICommand GoToTeamsCMD { get; set; }
         #endregion
 
         #region -- Binding values--
@@ -51,10 +52,11 @@ namespace TheOxbridgeApp.ViewModels
         {
             serverClient = new ServerClient();
             sharedData = SingletonSharedData.GetInstance();
-
+            
             TakePhotoCMD = new Command(TakePhoto);
             ChoosePhotoCMD = new Command(ChoosePhoto);
             PickPhotoFromGalleryCMD = new Command(PickPhotoFromGallery);
+            GoToTeamsCMD = new Command(GoToTeams);
             TeamPicture = new TeamImage();
             SelectedShip = new Ship();
         }
@@ -122,7 +124,9 @@ namespace TheOxbridgeApp.ViewModels
             {
                 var stream = await photo.OpenReadAsync();
 
-                TeamPicture.PictureSource = ImageSource.FromStream(() => stream);  // TO DO: How to select this photo as Team Photo
+                TeamPicture.PictureSource = ImageSource.FromStream(() => stream);
+                TeamPicture.Filename = photo.FullPath;
+                TeamPicture.Picture = System.IO.File.ReadAllBytes(TeamPicture.Filename);  //converting to byte array
             }
         }
 
@@ -131,6 +135,14 @@ namespace TheOxbridgeApp.ViewModels
         {
             sharedData.SelectedShip.teamImage = TeamPicture;
             serverClient.SaveImageToDB(sharedData.SelectedShip.ShipId, sharedData.SelectedShip.teamImage);
+            
+        }
+
+        public async void GoToTeams()
+        {
+            TeamPicture.PictureSource = ImageSource.FromFile("trackingBoatIcon.png"); //unselecting image shown in EditTeamView
+            sharedData.SelectedShip.teamImage = null;                                 //unselecting SelectedShip
+            await NavigationService.NavigateToAsync(typeof(TeamViewModel));
         }
     }
 }

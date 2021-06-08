@@ -218,10 +218,9 @@ namespace TheOxbridgeApp.Services
                 content.Add(shipIdContent, "shipId_img");
 
                 var response = await client.PostAsync(Target.Images, content);
-
                 var responsestr = response.Content.ReadAsStringAsync().Result;
 
-            Debug.WriteLine(responsestr);
+                Debug.WriteLine(responsestr);
             }
             catch (Exception e)
             {

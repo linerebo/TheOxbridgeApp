@@ -16,8 +16,8 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"></RowDefinition>
-                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="70"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Text="Sejlbåd navn" HorizontalOptions="Fill"  Grid.Column="0" Grid.Row="0" FontAttributes="Bold" Margin="1"/>
                 <Label Text="Team navn" HorizontalOptions="Fill"  Grid.Column="1" Grid.Row="0" FontAttributes="Bold" Margin="1"/>
@@ -38,9 +38,21 @@
                             LoadingPlaceholder="loading.png"  
                             DownsampleToViewSize="true"
                             HeightRequest="200" WidthRequest="200" ></ff:CachedImage>
+
+            <StackLayout
+                Padding="15" Orientation="Horizontal" HorizontalOptions="Center">
+
+                <Button Text="Choose this Photo for Team Profile" BackgroundColor="SkyBlue" CornerRadius="8" WidthRequest="150" HeightRequest="70"
+                        Command="{Binding ChoosePhotoCMD}">
+                </Button>
+
+                <Button Text="Go To Teams" BackgroundColor="SkyBlue" CornerRadius="8" WidthRequest="100" HeightRequest="70"
+                        Command="{Binding GoToTeamsCMD}">
+                </Button>
+
+            </StackLayout>
             
-            
-            <Button Text="Choose this Photo for Team Profile" BackgroundColor="SkyBlue" CornerRadius="8" Command="{Binding ChoosePhotoCMD}"></Button>
+                
             
         </StackLayout>
     </ContentPage.Content>

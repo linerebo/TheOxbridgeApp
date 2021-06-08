@@ -20,13 +20,6 @@ namespace TheOxbridgeApp.ViewModels
 
 
         #region --Binding values--
-        /*private ObservableCollection<Ship> ships;
-        public ObservableCollection<Ship> Ships
-        {
-            get { return ships; }
-            set { ships = value; OnPropertyChanged(); }
-        }*/
-
         private Ship selectedShip;
         public Ship SelectedShip
         {
@@ -62,6 +55,7 @@ namespace TheOxbridgeApp.ViewModels
         // Navigates to View with selected Ship
         private async void NavigateToEditTeam()
         {
+            sharedData.SelectedShip.teamImage = null;
             await NavigationService.NavigateToAsync(typeof(EditTeamViewModel));
         }
 

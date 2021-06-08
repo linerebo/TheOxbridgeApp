@@ -18,8 +18,6 @@ namespace TheOxbridgeApp.ViewModels
         private ServerClient serverClient;
 
         private List<Event> unHandledEvents;
-        
-
         #endregion
 
         #region -- Binding values -- 
