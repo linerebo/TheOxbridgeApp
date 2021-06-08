@@ -213,14 +213,15 @@ namespace TheOxbridgeApp.Services
                 MultipartFormDataContent content = new MultipartFormDataContent();
                 ByteArrayContent baContent = new ByteArrayContent(teamImage.Picture);
                 StringContent shipIdContent = new StringContent(shipId.ToString());
-                content.Add(baContent, "image"); //, teamImage.Filename);
-                content.Add(shipIdContent, "shipId");
+                
+                content.Add(baContent, "image", teamImage.Filename);
+                content.Add(shipIdContent, "shipId_img");
 
-                var response = await client.PostAsync("http://192.168.178.46:3000/images", content);
+                var response = await client.PostAsync(Target.Images, content);
 
                 var responsestr = response.Content.ReadAsStringAsync().Result;
 
-                Debug.WriteLine(responsestr);
+            Debug.WriteLine(responsestr);
             }
             catch (Exception e)
             {

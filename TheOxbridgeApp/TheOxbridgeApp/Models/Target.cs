@@ -27,5 +27,6 @@ namespace TheOxbridgeApp.Models
         public const String ReplayLocations = StandardAdress + "locationRegistrations/getReplay/";
         public const String Ships = StandardAdress + "ships/";
         public const String ShipFromEventId = StandardAdress + "ships/fromeventid/";
+        public const String Images = StandardAdress + "images/";
     }
 }
