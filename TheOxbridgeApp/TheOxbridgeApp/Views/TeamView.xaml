@@ -8,7 +8,7 @@
              
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Registrated Teams" FontSize="20" BackgroundColor="SkyBlue"></Label>
+            <Label Text="Alle tilmeldte Teams" FontSize="20" BackgroundColor="SkyBlue"></Label>
             
             <Entry Text="{Binding SearchText}" Placeholder="Søg" ></Entry>
             <ListView SeparatorColor="Transparent" x:Name="navigationList" ItemsSource="{Binding sharedData.Ships}"  SelectedItem="{Binding sharedData.SelectedShip, Mode=TwoWay}" HasUnevenRows="True">
@@ -21,7 +21,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Text="Sejlbåd navn" HorizontalOptions="Fill"  Grid.Column="0" FontAttributes="Bold" Margin="1"/>
                         <Label Text="Team navn" HorizontalOptions="Fill"  Grid.Column="1" FontAttributes="Bold" Margin="1"/>
-                        <Label Text="Team Image" HorizontalOptions="Fill"  Grid.Column="2" FontAttributes="Bold" Margin="1"/>
+                        <Label Text="Team Foto" HorizontalOptions="Fill"  Grid.Column="2" FontAttributes="Bold" Margin="1"/>
                     </Grid>
                 </ListView.Header>
 
@@ -47,7 +47,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button Text="Edit Team" BackgroundColor="SkyBlue" CornerRadius="8" Command="{Binding NavigateToEditTeamCMD}"></Button>
+            <Button Text="Rediger Team" BackgroundColor="SkyBlue" CornerRadius="8" Command="{Binding NavigateToEditTeamCMD}"></Button>
 
         </StackLayout>
     </ContentPage.Content>

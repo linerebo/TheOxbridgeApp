@@ -26,8 +26,6 @@ namespace TheOxbridgeApp.Models
         public Ship SelectedShip { get; set; }
         public TeamImage teamImage { get; set; }
 
-        //public ObservableCollection<Models.Ship> Ships { get; set; }  = new ObservableCollection<Ship>();
-
         private ObservableCollection<Ship> ships;
         public ObservableCollection<Ship> Ships
         {

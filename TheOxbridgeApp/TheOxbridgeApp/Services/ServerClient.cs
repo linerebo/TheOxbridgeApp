@@ -197,12 +197,40 @@ namespace TheOxbridgeApp.Services
             WebRequest request = WebRequest.Create(Target.Ships);
             request.Method = "GET";
             request.ContentType = "application/json";
-
             String responseFromServer = GetResponse(request);
-
             List<Ship> ships = JsonConvert.DeserializeObject<List<Ship>>(responseFromServer);
+  
+            WebRequest requestImages = WebRequest.Create(Target.Images);
+            requestImages.Method = "GET";
+            requestImages.ContentType = "application/json";
+            responseFromServer = GetResponse(requestImages);
+            List<ServerImage> images = JsonConvert.DeserializeObject<List<ServerImage>>(responseFromServer);
+
+            foreach(ServerImage i in images)
+            {
+                Predicate<Ship> Match = s => s.ShipId == i.ShipId_img;  //lamda expression that tests if shipId of s equals shipId of image i
+                Ship x = ships.Find(Match);
+                x.teamImage = new TeamImage();
+                x.teamImage.Picture = Convert.FromBase64String(i.ImageBase64);  //converting Image String to byte[]
+                x.teamImage.Filename = i.Filename;
+            }
+
             return ships;
         }
+
+
+        public List<ServerImage> GetAllImages()
+        {
+            WebRequest requestImages = WebRequest.Create(Target.Images);
+            requestImages.Method = "GET";
+            requestImages.ContentType = "application/json";
+            String responseFromServer = GetResponse(requestImages);
+            List<ServerImage> images = JsonConvert.DeserializeObject<List<ServerImage>>(responseFromServer);
+
+            return images;
+        }
+
+
 
         // Post an image and shipID to store in DB
         public async void SaveImageToDB(int shipId, TeamImage teamImage)

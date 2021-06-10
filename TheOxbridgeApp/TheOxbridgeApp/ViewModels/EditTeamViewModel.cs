@@ -10,6 +10,7 @@ using TheOxbridgeApp.Services;
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
 using Xamarin.Essentials;
+using System.Collections.ObjectModel;
 
 namespace TheOxbridgeApp.ViewModels
 {
@@ -20,6 +21,7 @@ namespace TheOxbridgeApp.ViewModels
         public SingletonSharedData sharedData { get; set; }
         public String ErrorMsg { get; set; }
         public Ship SelectedShip { get; set; }
+        private List<Ship> unHandledShips;
         #endregion
 
         #region --Commands--
@@ -141,7 +143,9 @@ namespace TheOxbridgeApp.ViewModels
         public async void GoToTeams()
         {
             TeamPicture.PictureSource = ImageSource.FromFile("trackingBoatIcon.png"); //unselecting image shown in EditTeamView
-            sharedData.SelectedShip.teamImage = null;                                 //unselecting SelectedShip
+            //sharedData.SelectedShip.teamImage = null;                                 //unselecting SelectedShip
+            unHandledShips = serverClient.GetAllShips();
+            sharedData.Ships = new ObservableCollection<Ship>(unHandledShips);
             await NavigationService.NavigateToAsync(typeof(TeamViewModel));
         }
     }
