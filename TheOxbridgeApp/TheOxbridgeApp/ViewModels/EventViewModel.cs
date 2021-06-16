@@ -16,7 +16,7 @@ namespace TheOxbridgeApp.ViewModels
 
         #region -- Local variables -- 
         private ServerClient serverClient;
-
+        public SingletonSharedData sharedData { get; set; }
         private List<Event> unHandledEvents;
         #endregion
 
@@ -63,10 +63,18 @@ namespace TheOxbridgeApp.ViewModels
         /// </summary>
         public async void OnAppearing()
         {
-            await PopupNavigation.PushAsync(new LoadingPopupView()).ConfigureAwait(false);
-            unHandledEvents = serverClient.GetEvents();
-            SetEventStatus();
-            await PopupNavigation.PopAllAsync().ConfigureAwait(false);
+            try
+            {
+                await PopupNavigation.PushAsync(new LoadingPopupView()).ConfigureAwait(false);
+                unHandledEvents = serverClient.GetEvents();
+                SetEventStatus();
+                await PopupNavigation.PopAllAsync().ConfigureAwait(false);
+            }
+            catch
+            {
+                Console.WriteLine("No connection to Server");
+            }
+            
         }
 
         /// <summary>
@@ -141,7 +149,6 @@ namespace TheOxbridgeApp.ViewModels
         //Navigate to View with all Teams
         private async void NavigateToTeams()
         {
-            
             await NavigationService.NavigateToAsync(typeof(TeamViewModel));
 
         }

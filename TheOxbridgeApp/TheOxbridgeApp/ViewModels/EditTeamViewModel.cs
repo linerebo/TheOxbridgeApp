@@ -143,7 +143,6 @@ namespace TheOxbridgeApp.ViewModels
         public async void GoToTeams()
         {
             TeamPicture.PictureSource = ImageSource.FromFile("trackingBoatIcon.png"); //unselecting image shown in EditTeamView
-            //sharedData.SelectedShip.teamImage = null;                                 //unselecting SelectedShip
             unHandledShips = serverClient.GetAllShips();
             sharedData.Ships = new ObservableCollection<Ship>(unHandledShips);
             await NavigationService.NavigateToAsync(typeof(TeamViewModel));

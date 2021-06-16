@@ -25,6 +25,9 @@
     <EmbeddedResource Update="Views\EditTeamView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\NoConnection.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Popups\LoadingPopupView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

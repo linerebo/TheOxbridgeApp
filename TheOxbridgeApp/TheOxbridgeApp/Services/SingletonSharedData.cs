@@ -26,19 +26,20 @@ namespace TheOxbridgeApp.Models
         public Ship SelectedShip { get; set; }
         public TeamImage teamImage { get; set; }
 
+        public bool isMapDisplayed { get; set; }
+
+        public bool HasSelectedDifferentEvent { get; set; }
+
+        public TrackingPoupViewModel TrackingPoupViewModel;
+        #endregion
+
+        #region -- binding values
         private ObservableCollection<Ship> ships;
         public ObservableCollection<Ship> Ships
         {
             get { return ships; }
             set { ships = value; OnPropertyChanged(); }
         }
-
-        public bool isMapDisplayed { get; set; }
-
-        public bool HasSelectedDifferentEvent { get; set; }
-
-
-        public TrackingPoupViewModel TrackingPoupViewModel;
         #endregion
 
         private SingletonSharedData()

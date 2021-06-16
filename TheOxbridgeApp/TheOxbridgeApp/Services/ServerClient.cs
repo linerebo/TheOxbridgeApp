@@ -9,7 +9,6 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using TheOxbridgeApp.Data;
 using TheOxbridgeApp.Models;
-using Xamarin.Forms;
 
 namespace TheOxbridgeApp.Services
 {
@@ -18,13 +17,13 @@ namespace TheOxbridgeApp.Services
         #region -- Local variables -- 
         private DataController dataController;
         private ServerClient client;
-        private string ipAddress = "192.168.178.46";
-        private string port = "3000";
+        
         #endregion
 
         public ServerClient()
         {
             dataController = new DataController();
+            
         }
 
 
@@ -37,18 +36,24 @@ namespace TheOxbridgeApp.Services
         public User Login(String username, String password)
         {
             String target = Target.Authenticate;
-
             String jsonData = "{\"emailUsername\": \"" + username + "\", \"password\": \"" + password + "\" }";
             WebRequest request = WebRequest.Create(target);
             request.Method = "POST";
             request.ContentType = "application/json";
 
-            using (Stream requestStream = request.GetRequestStream())
-            {
-                using (StreamWriter streamWriter = new StreamWriter(requestStream))
+            try 
+            { 
+                using (Stream requestStream = request.GetRequestStream())
                 {
-                    streamWriter.Write(jsonData);
+                    using (StreamWriter streamWriter = new StreamWriter(requestStream))
+                    {
+                        streamWriter.Write(jsonData);
+                    }
                 }
+            }
+            catch 
+            {
+                Console.WriteLine("There is no connection to the server! ");
             }
             User foundUser = null;
             try
@@ -61,6 +66,7 @@ namespace TheOxbridgeApp.Services
             }
             return foundUser;
         }
+
 
         /// <summary>
         /// Gets the last 20 locations for each boat in a specific event from the backend 
@@ -102,6 +108,7 @@ namespace TheOxbridgeApp.Services
         /// <returns>A list of Events</returns>
         public List<Event> GetEvents()
         {
+
             WebRequest request = WebRequest.Create(Target.Events);
             request.Method = "GET";
 
@@ -190,74 +197,6 @@ namespace TheOxbridgeApp.Services
             return ships;
         }
 
-        //Gets all ships from the backend
-        // returns A list of Ships
-        public List<Ship> GetAllShips()
-        {
-            WebRequest request = WebRequest.Create(Target.Ships);
-            request.Method = "GET";
-            request.ContentType = "application/json";
-            String responseFromServer = GetResponse(request);
-            List<Ship> ships = JsonConvert.DeserializeObject<List<Ship>>(responseFromServer);
-  
-            WebRequest requestImages = WebRequest.Create(Target.Images);
-            requestImages.Method = "GET";
-            requestImages.ContentType = "application/json";
-            responseFromServer = GetResponse(requestImages);
-            List<ServerImage> images = JsonConvert.DeserializeObject<List<ServerImage>>(responseFromServer);
-
-            foreach(ServerImage i in images)
-            {
-                Predicate<Ship> Match = s => s.ShipId == i.ShipId_img;  //lamda expression that tests if shipId of s equals shipId of image i
-                Ship x = ships.Find(Match);
-                x.teamImage = new TeamImage();
-                x.teamImage.Picture = Convert.FromBase64String(i.ImageBase64);  //converting Image String to byte[]
-                x.teamImage.Filename = i.Filename;
-            }
-
-            return ships;
-        }
-
-
-        public List<ServerImage> GetAllImages()
-        {
-            WebRequest requestImages = WebRequest.Create(Target.Images);
-            requestImages.Method = "GET";
-            requestImages.ContentType = "application/json";
-            String responseFromServer = GetResponse(requestImages);
-            List<ServerImage> images = JsonConvert.DeserializeObject<List<ServerImage>>(responseFromServer);
-
-            return images;
-        }
-
-
-
-        // Post an image and shipID to store in DB
-        public async void SaveImageToDB(int shipId, TeamImage teamImage)
-        {
-            try 
-            {
-                HttpClient client = new HttpClient();
-                MultipartFormDataContent content = new MultipartFormDataContent();
-                ByteArrayContent baContent = new ByteArrayContent(teamImage.Picture);
-                StringContent shipIdContent = new StringContent(shipId.ToString());
-                
-                content.Add(baContent, "image", teamImage.Filename);
-                content.Add(shipIdContent, "shipId_img");
-
-                var response = await client.PostAsync(Target.Images, content);
-                var responsestr = response.Content.ReadAsStringAsync().Result;
-
-                Debug.WriteLine(responsestr);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Exception Caught: " + e.ToString());
-                return;
-            }
-        }
-
-
         /// <summary>
         /// Gets the response from a request from the backend
         /// </summary>
@@ -266,7 +205,7 @@ namespace TheOxbridgeApp.Services
         private String GetResponse(WebRequest request)
         {
             String responseFromServer = "";
-
+            
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
                 using (Stream responseStream = response.GetResponseStream())
@@ -275,7 +214,6 @@ namespace TheOxbridgeApp.Services
 
                         responseFromServer = reader.ReadToEnd();
                 }
-
                 return responseFromServer;
             }
         }
@@ -319,7 +257,6 @@ namespace TheOxbridgeApp.Services
             }
         }
 
-
         /// <summary>
         /// Gets the statuscode for a request from the backend
         /// </summary>
@@ -330,6 +267,65 @@ namespace TheOxbridgeApp.Services
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
                 return response.StatusCode.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Get all ships from the backend
+        /// </summary>
+        /// <returns>A List of Ships</returns>
+        public List<Ship> GetAllShips()
+        {
+            WebRequest request = WebRequest.Create(Target.Ships);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            String responseFromServer = GetResponse(request);
+            List<Ship> ships = JsonConvert.DeserializeObject<List<Ship>>(responseFromServer);
+
+            WebRequest requestImages = WebRequest.Create(Target.Images);
+            requestImages.Method = "GET";
+            requestImages.ContentType = "application/json";
+            responseFromServer = GetResponse(requestImages);
+            List<ServerImage> images = JsonConvert.DeserializeObject<List<ServerImage>>(responseFromServer);
+
+            foreach (ServerImage i in images)
+            {
+                Predicate<Ship> Match = s => s.ShipId == i.ShipId_img;  //lamda expression that tests if shipId of s equals shipId of image i
+                Ship x = ships.Find(Match);
+                x.teamImage = new TeamImage();
+                x.teamImage.Picture = Convert.FromBase64String(i.ImageBase64);  //converting Image String to byte[]
+                x.teamImage.Filename = i.Filename;
+            }
+            return ships;
+        }
+
+
+        /// <summary>
+        /// Post an Image with shipId to the backend
+        /// </summary>
+        /// <param name="shipId"></param>
+        /// <param name="teamImage"></param>
+        public async void SaveImageToDB(int shipId, TeamImage teamImage)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                MultipartFormDataContent content = new MultipartFormDataContent();
+                ByteArrayContent baContent = new ByteArrayContent(teamImage.Picture);
+                StringContent shipIdContent = new StringContent(shipId.ToString());
+
+                content.Add(baContent, "image", teamImage.Filename);
+                content.Add(shipIdContent, "shipId_img");
+
+                var response = await client.PostAsync(Target.Images, content);
+                var responsestr = response.Content.ReadAsStringAsync().Result;
+
+                Debug.WriteLine(responsestr);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception Caught: " + e.ToString());
+                return;
             }
         }
     }
