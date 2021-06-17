@@ -4,6 +4,10 @@ using TheOxbridgeApp.Data;
 using TheOxbridgeApp.Models;
 using TheOxbridgeApp.Services;
 using Xunit;
+using Xunit.Sdk;
+using Xunit.Runners.UI;
+using System.Reflection;
+
 
 namespace XUnitAndroid
 {
@@ -106,6 +110,24 @@ namespace XUnitAndroid
             {
                 return 0;
             }
+        }
+
+        /// <summary>
+        /// The Unit test is testing if the backend is responding
+        /// </summary>
+
+        [Fact]
+        public void TestBackendResponding()
+        {
+            //Arrange
+            var UnitTestServerClient = new ServerClient();
+
+            //Act
+            User UnitTestUser = UnitTestServerClient.Login("testuser", "123456");
+            bool result = UnitTestUser == null || UnitTestUser.ConnectionSuccess;
+
+            //Assert
+            Assert.True(result);
         }
     }
 }

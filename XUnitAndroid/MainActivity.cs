@@ -8,6 +8,7 @@ using System.Reflection;
 using Xunit.Runners.UI;
 using Xunit.Sdk;
 
+
 namespace XUnitAndroid
 {
     [Activity(Label = "@String/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]

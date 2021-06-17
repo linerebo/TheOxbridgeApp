@@ -9,7 +9,7 @@ namespace TheOxbridgeApp.Models
         public String LastName { get; set; }
         public String Password { get; set; }
         public String Token { get; set; }
-
+        public bool ConnectionSuccess { get; set; }
 
     }
 }

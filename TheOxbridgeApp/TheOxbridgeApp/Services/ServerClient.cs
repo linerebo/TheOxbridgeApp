@@ -53,16 +53,27 @@ namespace TheOxbridgeApp.Services
             }
             catch 
             {
+                User ExceptionUser = new User();
+                ExceptionUser.ConnectionSuccess = false;
                 Console.WriteLine("There is no connection to the server! ");
+                return ExceptionUser;
             }
             User foundUser = null;
             try
             {
                 String responseFromServer = GetResponse(request);
                 foundUser = JsonConvert.DeserializeObject<User>(responseFromServer);
+                if(foundUser != null) 
+                { 
+                    foundUser.ConnectionSuccess = true;
+                }
             }
             catch (WebException)
             {
+                User ExceptionUser = new User();
+                ExceptionUser.ConnectionSuccess = false;
+                Console.WriteLine("There is no connection to the server! ");
+                return ExceptionUser;
             }
             return foundUser;
         }
